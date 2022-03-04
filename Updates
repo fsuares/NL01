@@ -4,3 +4,7 @@
 
 1.1 -
     Foi feito commit com melhorias na usabilidade, melhorando design e desempenho do programa
+    * O menu foi redesenhado
+    * Todas as funções da aplciação foram movidas para um arquivo separado
+    * Foi aplicado a função 'Sleep' da biblioteca 'time', para que fique melhor entendido pelo usuario, a funcionalidade do programa
+    * Foi criado dentro da função main um laço infinito para inicio e fim do programa
