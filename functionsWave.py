@@ -4,6 +4,53 @@ from math import pi
 from time import sleep
 
 
+def menu_resposta(resposta):
+    chaves = resposta.keys()
+    print("Respostas")
+    respostas_print = []
+    i = 0
+    for chave in chaves:
+        respostas_print[i] = f"{str(chave).replace('_', ' ').title()} - {resposta[chave]}"
+        i += 1
+
+    for respostas in respostas_print:
+        print(respostas)
+
+
+def comprimento_de_onda():
+    comp_onda = float(input("Digite o comprimento de onda em metro: "))
+    # Calcular frequencia
+    freq = calcular_frequencia(comp_onda)
+    # Calulcar nº de onda
+    k = calcular_número_de_onda(comp_onda)
+    # Calcular freq angular
+    freq_ang = calulcar_frequencia_angular(freq)
+
+    resposta = {
+        frequencia: freq,
+        numero_de_onda: k,
+        frequencia_angular: freq_ang,
+    }
+
+    menu_resposta(resposta=resposta)
+
+
+def calulcar_frequencia_angular(frequencia):
+    freq_ang = 2*pi*frequencia
+    return freq_ang
+
+
+def calcular_número_de_onda(comprimento_onda):
+    k = (2*pi) / comprimento_onda
+    return k
+
+
+def calcular_frequencia(comprimento_onda):
+    freq = (3*10^8)/ comprimento_onda
+    return freq
+
+
+
 def comprimento_de_onda():
   print('comprimento_de_onda')
 
