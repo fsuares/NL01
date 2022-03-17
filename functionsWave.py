@@ -1,7 +1,7 @@
 from math import pi
 from time import sleep
 
-VELOCIDADE = (3.8 * (10 ^ 8))
+VELOCIDADE = (3 * (10 ** 8))
 
 
 def menu_resposta(resposta):
@@ -87,6 +87,22 @@ def calcular_frequencia(comprimento_onda, freq_angular=None):
     return freq
 
 
+def calc_campo_eletrico():
+    camp_eletrico = int(
+        input("Digite o valor do campo elétrico (em inteiros): "))
+
+    campo_magnetico = camp_eletrico / VELOCIDADE
+
+    print(f'Campo Magnético: {campo_magnetico}')
+
+
+def cacl_campo_magnetico():
+    camp_magnetico = float(input("Digite o valor do campo magnético: "))
+    campo_eletrico = camp_magnetico * VELOCIDADE
+
+    print(f'Campo Magnético: {campo_eletrico}')
+
+
 def menu_principal():
     sleep(1)
     print('\nQual parâmetro de onda será a entrada?\n')
@@ -114,3 +130,9 @@ def menu_principal():
 
     elif option == 4:
         frequencia_angular()
+
+    elif option == 5:
+        calc_campo_eletrico()
+
+    elif option == 6:
+        cacl_campo_magnetico()
