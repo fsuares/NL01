@@ -1,10 +1,4 @@
-
-
 from functionsWave import *
-
-
-
-VELOCIDADE = 3.8 * 10**8
 
 
 def main():

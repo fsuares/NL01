@@ -1,38 +1,74 @@
-
-
 from math import pi
 from time import sleep
+
+VELOCIDADE = (3.8 * (10 ^ 8))
 
 
 def menu_resposta(resposta):
     chaves = resposta.keys()
     print("Respostas")
     respostas_print = []
-    i = 0
     for chave in chaves:
-        respostas_print[i] = f"{str(chave).replace('_', ' ').title()} - {resposta[chave]}"
-        i += 1
+        resposta_frase = f"{str(chave).replace('_', ' ').title()} - {resposta[chave]}"
+        respostas_print.append(resposta_frase)
 
     for respostas in respostas_print:
         print(respostas)
 
 
-def comprimento_de_onda():
-    comp_onda = float(input("Digite o comprimento de onda em metro: "))
+def calculos_gerais(comp_onda=None, freq=None, freq_ang=None, numero_de_onda=None):
+    comp_onda = calcular_comprimento_de_onda(
+        numero_de_onda=numero_de_onda) if numero_de_onda is not None else comp_onda
+
     # Calcular frequencia
-    freq = calcular_frequencia(comp_onda)
+    frequencia = freq or calcular_frequencia(
+        comprimento_onda=comp_onda, freq_angular=freq_ang)
+    # Calcular comprimento de onda
+    comprimento_onda = comp_onda or calcular_comprimento_de_onda(
+        frequencia=frequencia, numero_de_onda=numero_de_onda)
     # Calulcar nº de onda
-    k = calcular_número_de_onda(comp_onda)
+    k = numero_de_onda or calcular_número_de_onda(comprimento_onda)
     # Calcular freq angular
-    freq_ang = calulcar_frequencia_angular(freq)
+    freq_angular = freq_ang or calulcar_frequencia_angular(frequencia)
 
     resposta = {
-        frequencia: freq,
-        numero_de_onda: k,
-        frequencia_angular: freq_ang,
+        'comprimento_de_onda': comprimento_onda,
+        'frequencia': frequencia,
+        'frequencia_angular': freq_angular,
+        'numero_de_onda': k,
     }
 
     menu_resposta(resposta=resposta)
+
+
+def comprimento_de_onda():
+    comp_onda = float(input("Digite o comprimento de onda em metro: "))
+
+    calculos_gerais(comp_onda=comp_onda)
+
+
+def frequencia():
+    freq = float(input("Digite a frequência em Hz: "))
+
+    calculos_gerais(freq=freq)
+
+
+def numero_de_onda():
+    k = float(input("Digite o número de onda em rad/m: "))
+
+    calculos_gerais(numero_de_onda=k)
+
+
+def frequencia_angular():
+    freq_angular = float(input("Digite a frequencia angular em rad/s: "))
+
+    calculos_gerais(freq_ang=freq_angular)
+
+
+def calcular_comprimento_de_onda(frequencia, numero_de_onda=None):
+    comp_onda = (
+        VELOCIDADE/frequencia) if numero_de_onda is None else 2*pi/numero_de_onda
+    return comp_onda
 
 
 def calulcar_frequencia_angular(frequencia):
@@ -45,44 +81,16 @@ def calcular_número_de_onda(comprimento_onda):
     return k
 
 
-def calcular_frequencia(comprimento_onda):
-    freq = (3*10^8)/ comprimento_onda
+def calcular_frequencia(comprimento_onda, freq_angular=None):
+    freq = (VELOCIDADE /
+            comprimento_onda) if freq_angular is None else (freq_angular / 2*pi)
     return freq
 
 
-
-def comprimento_de_onda():
-  print('comprimento_de_onda')
-
-
-def numero_de_onda():
-  print('numero_de_onda')
-  comp_onda = (2*pi) / valor
-
-
-def frequencia():
-  print('valor')
-  comp_onda = calc_comprimento_de_onda(valor)
-  freq_angular = calc_frequencia_angular(valor)
-
-
-def frequencia_angular():
-  print('frequencia_angular')
-
-
-def calc_frequencia_angular(valor):
-  return 2*pi*valor
-
-
-def calc_comprimento_de_onda(frequencia):
-  comp_onda = VELOCIDADE/frequencia
-  return comp_onda
-
-
 def menu_principal():
-  sleep(1)
-  print('\nQual parâmetro de onda será a entrada?\n')
-  print("""                 OPÇÕES
+    sleep(1)
+    print('\nQual parâmetro de onda será a entrada?\n')
+    print("""                 OPÇÕES
 ---------------------------------------
 |       1 - Comprimento de onda       |
 |       2 - Frequência                |
@@ -93,18 +101,16 @@ def menu_principal():
 ---------------------------------------
 """)
 
-  option = int(input("Escolha: "))
+    option = int(input("Escolha: "))
 
-  if option == 1:
-    comprimento_de_onda()
+    if option == 1:
+        comprimento_de_onda()
 
-  elif option == 2:
-    frequencia()
+    elif option == 2:
+        frequencia()
 
-  elif option == 3:
-    numero_de_onda()
+    elif option == 3:
+        numero_de_onda()
 
-  elif option == 4:
-    frequencia_angular()
-
-
+    elif option == 4:
+        frequencia_angular()
