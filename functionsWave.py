@@ -23,19 +23,26 @@ def calculos_gerais(comp_onda=None, freq=None, freq_ang=None, numero_de_onda=Non
     # Calcular frequencia
     frequencia = freq or calcular_frequencia(
         comprimento_onda=comp_onda, freq_angular=freq_ang)
+    formatedFreq = format(frequencia, ".3E")
+
     # Calcular comprimento de onda
     comprimento_onda = comp_onda or calcular_comprimento_de_onda(
         frequencia=frequencia, numero_de_onda=numero_de_onda)
+    formatedComp = format(comprimento_onda, ".3E")
+
     # Calulcar nº de onda
     k = numero_de_onda or calcular_número_de_onda(comprimento_onda)
+    formatedK = format(k, ".3E")
+
     # Calcular freq angular
     freq_angular = freq_ang or calulcar_frequencia_angular(frequencia)
+    formatedFreqAng = format(freq_angular, ".3E")
 
     resposta = {
-        'comprimento_de_onda': comprimento_onda,
-        'frequencia': frequencia,
-        'frequencia_angular': freq_angular,
-        'numero_de_onda': k,
+        'comprimento_de_onda': formatedComp,
+        'frequencia': formatedFreq,
+        'frequencia_angular': formatedFreqAng,
+        'numero_de_onda': formatedK,
     }
 
     menu_resposta(resposta=resposta)
